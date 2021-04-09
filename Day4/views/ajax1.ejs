@@ -1,0 +1,28 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+	var email=$("#email").val();
+	//alert(email);
+        $.ajax({
+
+url: "http://localhost:4300/endpoint1",
+type:"POST",
+data:{uname: email},
+
+ success: function(result){
+ 
+            $("#div1").html(result);
+			alert(result);
+        }});
+    });
+});
+</script>
+
+
+<div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
+Email<input  type=text id=email><br>
+<button>Get External Content</button>
+
+</body>
+</html>

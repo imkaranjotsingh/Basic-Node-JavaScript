@@ -1,0 +1,48 @@
+<form  method="post">
+    <input type="text" name="search" value="">
+
+    <ul>
+        <li><a href="#"></a></li>
+    </ul>
+
+    <div class="error">
+
+    </div></form>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" charset="utf-8"></script>
+
+<script type="text/javascript">
+  $(document).ready(function(e){
+      $('input[name="search"]').keyup(function(e){
+          var key = $(this).val();//l
+          $("ul").append("<li></li>");
+          $.ajax({
+              method:"post",
+              url:"http://localhost:4300/search",
+              data:{
+                keyword:key
+              },
+              cache: true,
+              headers:{
+              contentType: "json",
+            },dataType:"text",
+            success:function(response,responseText){
+              $("ul").empty();
+
+              // var q = jQuery.parseJSON(response.responseText);
+              var res = JSON.parse(response);
+              // console.log(res[0].college
+              if(res.length > 0){
+              for(var i = 0;i<res.length;i++){
+                $("ul").append("<li>"+res[i].college+"</li>");
+              }
+            }else{
+                $("ul").append("<li>No Results Found</li>");
+            }
+            },error:function(response,responseText){
+
+            }
+          });
+        });
+
+  });
+</script>

@@ -1,0 +1,23 @@
+{
+  "name": "dasda",
+  "version": "1.0.0",
+  "description": "sadaa",
+  "main": "asdad",
+  "scripts": {
+    "test": "asdaaac",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "afsdvs"
+  },
+  "keywords": [
+    "afdxzx"
+  ],
+  "author": "afcxaczc",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  }
+}

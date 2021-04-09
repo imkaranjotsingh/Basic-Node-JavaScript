@@ -1,0 +1,57 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" charset="utf-8"></script>
+
+<select id="country">
+    <option value="">Select country</option>
+    <% if(countries){
+        for(i=0;i<countries.length;i++){
+    %>
+    <option value="<%= countries[i].code %>"><%= countries[i].name %></option>
+    <% } } %>
+</select>
+
+<select id="states">
+    <option value="">Select states</option>
+</select>
+<select id = "cities">
+    <option value="">Select city</option>
+</select>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('select#country').on('change',function(){
+            var cityoptions="<option value=''>Select city</option>";
+            $('select#cities').html(cityoptions);
+            $.ajax({
+                url:'http://localhost:4300/states/'+$(this).val(),
+                type:"GET",
+                contentType:"application/json",
+                dataType:"json",
+                success:function(data){
+                    var stateoptions = "<option value=''>Select state</option>";
+                    states = data.states;
+                    for(var i = 0;i<states.length;i++){
+                        stateoptions+="<option value='"+states[i].code+"'>"+states[i].name+"</option>"
+
+                    }
+                    $('select#states').html(stateoptions);
+                }
+            });
+        });
+        $('select#states').on('change',function(){
+            $.ajax({
+                url:'http://localhost:4300/cities/'+$(this).val(),
+                type:"GET",
+                contentType:"application/json",
+                dataType:"json",
+                success:function(data){
+                    var cityoptions="<option value=''>Select city</option>";
+                    cities = data.cities;
+                    for(var i=0; i<cities.length; i++){
+                        cityoptions+="<option value='"+cities[i].code+"'>"+cities[i].name+"</option>"
+                    }
+                    $('select#cities').html(cityoptions);
+                }
+            });
+        });
+    });
+</script>
